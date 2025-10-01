@@ -34,7 +34,7 @@ export default function Countdown() {
                 className="text-3xl sm:text-3xl md:text-6xl opacity-80"
                 style={{ fontFamily: "'PP Neue Bit', sans-serif" }}
             >
-                First period drops in:
+                First episode drops in:
             </div>
 
             {isDone ? (
