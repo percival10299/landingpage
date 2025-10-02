@@ -31,6 +31,7 @@ export default function Home() {
         />
       </video>
 
+
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/30 -z-5"></div>
 

@@ -2,11 +2,13 @@ import Image from "next/image";
 
 export default function SocialMedia() {
     return (
-        <div className="
-    absolute
-    top-6 left-8 gap-6     /* mobile default */
-    sm:top-10 sm:left-14 sm:gap-[60px]  /* laptop/desktop */
-    flex z-20">
+        <div
+            className="
+            absolute
+            top-6 left-8 gap-4     /* mobile default */
+            sm:top-10 sm:left-14 sm:gap-6  /* laptop/desktop */
+            flex z-20"
+        >
             <a
                 href="https://www.instagram.com/deliveryidol?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                 target="_blank"
@@ -15,9 +17,9 @@ export default function SocialMedia() {
                 <Image
                     src="/instagram.png"
                     alt="Instagram"
-                    width={60}
-                    height={60}
-                    className="hover:opacity-80 w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                    width={40}
+                    height={40}
+                    className="hover:opacity-80 w-8 h-8"
                 />
             </a>
 
@@ -29,9 +31,9 @@ export default function SocialMedia() {
                 <Image
                     src="/tiktoc.png"
                     alt="TikTok"
-                    width={60}
-                    height={60}
-                    className="hover:opacity-80 w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                    width={40}
+                    height={40}
+                    className="hover:opacity-80 w-8 h-8"
                 />
             </a>
 
@@ -43,9 +45,9 @@ export default function SocialMedia() {
                 <Image
                     src="/youtube.png"
                     alt="YouTube"
-                    width={60}
-                    height={60}
-                    className="hover:opacity-80 w-10 h-10 sm:w-[60px] sm:h-[60px]"
+                    width={40}
+                    height={40}
+                    className="hover:opacity-80 w-8 h-8"
                 />
             </a>
         </div>
