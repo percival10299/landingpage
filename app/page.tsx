@@ -1,36 +1,17 @@
 "use client";
 import Image from "next/image";
-import { useState, useEffect } from "react";
 import Countdown from "./countdown";
 import NotifyForm from "./email";
 import SocialMedia from "./socialmedia";
+import Background from "./background";
 
 export default function Home() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkScreenSize = () => setIsMobile(window.innerWidth < 768);
-    checkScreenSize();
-    window.addEventListener("resize", checkScreenSize);
-    return () => window.removeEventListener("resize", checkScreenSize);
-  }, []);
-
   return (
     <main className="relative w-full h-screen overflow-hidden">
-      {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute top-0 left-0 min-w-full min-h-full object-cover object-center -z-10"
-      >
-        <source
-          src={isMobile ? "/background-mobile.mp4" : "/background.mp4"}
-          type="video/mp4"
-        />
-      </video>
-
+      {/* Background Component */}
+      <div className="absolute inset-0 -z-10">
+        <Background />
+      </div>
 
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/30 -z-5"></div>

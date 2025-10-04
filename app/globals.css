@@ -1,10 +1,14 @@
 @import "tailwindcss";
 
+/* ====== 基础配色 ====== */
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
 
+  /* Background 用的颜色 */
+  --chaos-bg: #2234ff; /* 深蓝背景 */
+  --chaos-accent: #eddf56; /* 黄色符号 */
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -13,23 +17,79 @@
   }
 }
 
+/* ====== 全局 body 样式 ====== */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'PP Neue Montreal', sans-serif;
+  font-family: "PP Neue Montreal", sans-serif;
 }
 
+/* ====== 字体引入 ====== */
 @font-face {
-  font-family: 'PP Neue Montreal';
-  src: url('/fonts/PPNeueMontreal-SemiBolditalic.otf') format('opentype');
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-SemiBolditalic.otf") format("opentype");
   font-weight: 500;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'PP Neue Bit';
-  src: url('/font/PPNeueBit-Bold.otf') format('opentype');
+  font-family: "PP Neue Bit";
+  src: url("/font/PPNeueBit-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
+}
+
+/* ====== Chaos Background 样式 ====== */
+.chaos-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--chaos-bg);
+  overflow: hidden;
+}
+
+.chaos-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(60px, 1fr));
+  gap: 40px;
+  padding: 20px;
+  box-sizing: border-box;
+  justify-items: center;
+  align-items: center;
+}
+
+.symbol {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.8s ease-out;
+}
+
+/* 横竖线 */
+.symbol::before,
+.symbol::after {
+  content: "";
+  position: absolute;
+  background-color: var(--chaos-accent);
+  border-radius: 2px;
+}
+
+/* 横线 */
+.symbol::before {
+  width: 50px;
+  height: 2px;
+}
+
+/* 竖线（只给 plus 加） */
+.symbol[data-type="plus"]::after {
+  width: 2px;
+  height: 50px;
 }
