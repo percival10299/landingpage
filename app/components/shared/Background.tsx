@@ -37,14 +37,14 @@ export default function Background() {
 
     const symbols = grid.querySelectorAll<HTMLDivElement>(".symbol");
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const rotateSymbols = (clientX: number, clientY: number) => {
       symbols.forEach((symbol) => {
         const rect = symbol.getBoundingClientRect();
         const x = rect.left + rect.width / 2;
         const y = rect.top + rect.height / 2;
 
-        const dx = e.clientX - x;
-        const dy = e.clientY - y;
+        const dx = clientX - x;
+        const dy = clientY - y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         const maxRotation = 720;
@@ -54,20 +54,38 @@ export default function Background() {
       });
     };
 
-    const handleMouseLeave = () => {
+    const resetSymbols = () => {
       symbols.forEach((symbol) => {
         symbol.style.transform = "rotate(0deg)";
       });
     };
 
+    // Desktop
+    const handleMouseMove = (e: MouseEvent) => rotateSymbols(e.clientX, e.clientY);
+    const handleMouseLeave = resetSymbols;
+
+    // Mobile
+    const handleTouchMove = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      if (touch) {
+        rotateSymbols(touch.clientX, touch.clientY);
+      }
+    };
+    const handleTouchEnd = resetSymbols;
+
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseleave", handleMouseLeave);
+    document.addEventListener("touchmove", handleTouchMove);
+    document.addEventListener("touchend", handleTouchEnd);
 
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchend", handleTouchEnd);
     };
   }, []);
+
 
   return (
     <div className="chaos-container">

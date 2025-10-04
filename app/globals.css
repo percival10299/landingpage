@@ -88,15 +88,22 @@ body {
   height: 2px;
 }
 
-/* 竖线（只给 plus 加） */
 .symbol[data-type="plus"]::after {
   width: 2px;
   height: 50px;
 }
-
 /* ====== 投票页面样式 ====== */
 .triangle-container {
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   background: transparent;
   position: relative;
+}
+
+@media (max-width: 768px) {
+  .symbol::before {
+    width: 35px;
+  }
+  .symbol[data-type="plus"]::after {
+    height: 35px;
+  }
 }
