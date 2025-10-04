@@ -79,3 +79,9 @@ function TimeBox({ label, value }: { label: string; value: number }) {
     </div>
   );
 }
+
+export const isDone = () => {
+  const target = new Date("2025-10-07T20:00:00-04:00").getTime();
+  const now = Date.now();
+  return now >= target;
+}
