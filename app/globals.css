@@ -88,8 +88,17 @@ body {
   height: 2px;
 }
 
-/* 竖线（只给 plus 加） */
 .symbol[data-type="plus"]::after {
   width: 2px;
   height: 50px;
 }
+
+@media (max-width: 768px) {
+  .symbol::before {
+    width: 35px;
+  }
+  .symbol[data-type="plus"]::after {
+    height: 35px;
+  }
+}
+
