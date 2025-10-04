@@ -1,13 +1,42 @@
 "use client";
-import Image from "next/image";
-import Countdown from "./countdown";
-import NotifyForm from "./email";
-import SocialMedia from "./socialmedia";
-import Background from "./background";
+import { useState, useEffect } from "react";
+import CountdownView from "./components/landing/CountdownView";
+import VotingLandingView from "./components/landing/VotingLandingView";
+import Background from "./components/shared/Background";
 
 export default function Home() {
+  const [isVotingOpen, setIsVotingOpen] = useState(false);
+  const [isManualOverride, setIsManualOverride] = useState(false);
+
+  useEffect(() => {
+    // 🎯 修改这里的时间来设置自动切换时间（需要与Countdown.tsx中的时间保持一致）
+    const targetDate = new Date("2025-10-07T20:00:00-04:00");
+    const checkTime = () => {
+      if (!isManualOverride) {
+        setIsVotingOpen(Date.now() >= targetDate.getTime());
+      }
+    };
+
+    checkTime();
+    const interval = setInterval(checkTime, 1000);
+    return () => clearInterval(interval);
+  }, [isManualOverride]);
+
+  const toggleState = () => {
+    setIsManualOverride(true);
+    setIsVotingOpen(!isVotingOpen);
+  };
+
   return (
     <main className="relative w-full h-screen overflow-hidden">
+      {/* 临时调试按钮 */}
+      <button
+        onClick={toggleState}
+        className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-red-600 transition-colors"
+      >
+        🔄 切换到 {isVotingOpen ? "倒计时" : "投票"} 状态
+      </button>
+
       {/* Background Component */}
       <div className="absolute inset-0 -z-10">
         <Background />
@@ -16,20 +45,7 @@ export default function Home() {
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/30 -z-5"></div>
 
-      <SocialMedia />
-      {/* Foreground Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
-        {/* 👇 Icon above countdown */}
-        <Image
-          src="/logo.png"
-          alt="Logo"
-          width={259}
-          height={234}
-          className="mb-6 w-[130px] h-auto sm:w-[180px] md:w-[220px] lg:w-[259px]"
-        />
-        <Countdown />
-        <NotifyForm />
-      </div>
+      {isVotingOpen ? <VotingLandingView /> : <CountdownView />}
     </main>
   );
 }
