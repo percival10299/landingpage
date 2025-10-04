@@ -34,7 +34,7 @@ export default function Home() {
         onClick={toggleState}
         className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-red-600 transition-colors"
       >
-        🔄 切换到 {isVotingOpen ? "倒计时" : "投票"} 状态
+        Show {isVotingOpen ? "Countdown" : "Voting"} Status
       </button>
 
       {/* Background Component */}
