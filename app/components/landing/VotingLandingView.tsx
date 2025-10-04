@@ -35,16 +35,7 @@ export default function VotingLandingView() {
     <>
       <SocialMedia />
 
-      {/* Watch and Vote buttons in top right */}
-      <div className="absolute top-6 right-8 sm:top-10 sm:right-14 flex gap-4 z-20">
-        <button className="bg-[#00FF1E] text-black px-6 py-2 rounded-full font-bold hover:opacity-80 transition-opacity">
-          ■ watch
-        </button>
-        <button className="bg-transparent border-2 border-[#00FF1E] text-[#00FF1E] px-6 py-2 rounded-full font-bold hover:bg-[#00FF1E] hover:text-black transition-all">
-          ▶ vote
-        </button>
-      </div>
-
+      
       {/* Main Content - Split Layout */}
       <div className="relative z-10 flex items-center justify-center h-full px-8 md:px-16">
         {/* Left Side - Robot Grid */}
