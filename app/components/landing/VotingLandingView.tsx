@@ -33,7 +33,6 @@ export default function VotingLandingView() {
 
   return (
     <>
-      <SocialMedia />
 
       
       {/* Main Content - Split Layout */}

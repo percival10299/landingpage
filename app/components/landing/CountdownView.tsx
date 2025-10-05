@@ -7,7 +7,6 @@ import SocialMedia from "../shared/SocialMedia";
 export default function CountdownView() {
   return (
     <>
-      <SocialMedia />
       {/* Foreground Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
         {/* Logo */}
