@@ -1,6 +1,15 @@
+import { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 
-export default function SocialMedia() {
+// Receive both props
+export default function SocialMedia({
+  isVotingOpen,
+  toggleState,
+}: {
+  isVotingOpen: boolean;
+  toggleState: () => void;
+}) {
+
   return (
     <div>
       {/* Left side icons */}
@@ -64,10 +73,13 @@ export default function SocialMedia() {
         >
           ■ watch
         </button>
-        <button className="bg-transparent border-2 border-[#00FF1E] text-[#00FF1E] px-6 py-2 rounded-full font-bold hover:bg-[#00FF1E] hover:text-black transition-all">
-          ▶ vote
+        <button
+          onClick={toggleState}
+          className="bg-transparent border-2 border-[#00FF1E] text-[#00FF1E] px-6 py-2 rounded-full font-bold hover:bg-[#00FF1E] hover:text-black transition-all">
+          {isVotingOpen ? "▶ countdown" : "▶ vote"}
         </button>
       </div>
     </div>
+
   );
 }
