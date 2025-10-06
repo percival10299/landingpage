@@ -107,3 +107,8 @@ body {
     height: 35px;
   }
 }
+
+.text-outline-black {
+  -webkit-text-stroke: 1px black; /* this is the real one browsers use */
+  -webkit-text-fill-color: #ffffff; /* keeps the inside white */
+}

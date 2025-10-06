@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import CountdownView from "./components/landing/CountdownView";
-import {isDone} from "./components/landing/Countdown";
+import { isDone } from "./components/landing/Countdown";
 import VotingLandingView from "./components/landing/VotingLandingView";
 import Background from "./components/shared/Background";
 import SocialMedia from "./components/shared/SocialMedia";
@@ -30,20 +30,24 @@ export default function Home() {
   };
 
   return (
-    <main className="relative w-full h-screen overflow-hidden">
+    <main
+      className={`w-full ${isVotingOpen
+          ? "relative overflow-visible min-h-screen" // ✅ scrollable
+          : "fixed inset-0 overflow-hidden h-screen" // ✅ fixed
+        }`}
+    >
       {/* Background Component */}
       <div className="absolute inset-0 -z-10">
         <Background />
       </div>
-      <SocialMedia 
-        isVotingOpen={isVotingOpen} 
-        toggleState={toggleState} 
-      />
 
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/30 -z-5"></div>
+      <SocialMedia
+        isVotingOpen={isVotingOpen}
+        toggleState={toggleState}
+      />
 
       {isVotingOpen ? <VotingLandingView /> : <CountdownView />}
     </main>
+
   );
 }

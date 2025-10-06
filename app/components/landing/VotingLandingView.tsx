@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import SocialMedia from "../shared/SocialMedia";
 
 export default function VotingLandingView() {
   const robotRows = [
@@ -22,9 +21,23 @@ export default function VotingLandingView() {
     ],
   ];
 
+  // ✅ FIXED image paths (no /public)
+  const votingRobots = [
+    { id: 1, name: "DEEPAK", image: "/robots/deepak.png" },
+    { id: 2, name: "MALIN", image: "/robots/malin.png" },
+    { id: 3, name: "LYNDON", image: "/robots/lyndon.png" },
+    { id: 4, name: "JUNPEI", image: "/robots/junpei.png" },
+    { id: 5, name: "COLLEEN", image: "/robots/colleen.png" },
+    { id: 6, name: "LIV", image: "/robots/liv.png" },
+    { id: 7, name: "DANI", image: "/robots/dani.png" },
+    { id: 8, name: "LOU", image: "/robots/lou.png" },
+    { id: 9, name: "DARYAN", image: "/robots/daryan.png" },
+    { id: 10, name: "KENSHIN", image: "/robots/kenshin.png" },
+  ];
+
   return (
     <>
-      {/* Main Content */}
+      {/* Landing Section */}
       <div className="relative z-10 flex flex-col md:flex-row items-center justify-center min-h-screen px-8 md:px-16">
         {/* Left Side - Robot Grid */}
         <div className="flex-1 flex flex-col items-center justify-center">
@@ -34,11 +47,10 @@ export default function VotingLandingView() {
                 {row.map((robot) => (
                   <div key={robot.id} className="flex flex-col items-center">
                     <div
-                      className={`relative ${
-                        robot.type === "black"
-                          ? "w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32"
-                          : "w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28"
-                      }`}
+                      className={`relative ${robot.type === "black"
+                        ? "w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32"
+                        : "w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28"
+                        }`}
                     >
                       <Image
                         src={`/robots/${robot.type}bot.png`}
@@ -81,7 +93,7 @@ export default function VotingLandingView() {
             ))}
           </div>
 
-          {/* 👇 Mobile-only Text (below robots, vertically centered) */}
+          {/* 👇 Mobile-only Text */}
           <div className="block md:hidden flex flex-col justify-center items-center text-center text-white mt-8">
             <p className="text-lg mb-2">Elimination hits Friday:</p>
             <h2 className="text-3xl font-bold mb-2">10 BOTS. 8 SPOTS.</h2>
@@ -98,7 +110,7 @@ export default function VotingLandingView() {
             DELIVERY IDOL
           </h1>
 
-          {/* Logo only visible on desktop */}
+          {/* Logo */}
           <div className="mb-8">
             <Image
               src="/logo.png"
@@ -122,6 +134,66 @@ export default function VotingLandingView() {
           </div>
         </div>
       </div>
+
+      {/* =========================== */}
+      {/* Voting Section (Desktop) */}
+      {/* =========================== */}
+      <div className="bg-[#1b8d81] min-h-screen flex flex-col justify-center items-center py-16 text-white">
+        <h1 className="text-4xl sm:text-5xl font-bold mb-12 tracking-wide text-center">
+          VOTE YOUR BOT
+        </h1>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-8 gap-y-14 px-6 sm:px-8 md:px-12 max-w-7xl">
+          {votingRobots.map((robot, index) => {
+            // bright, solid color cycle
+            const colors = ["bg-[#FFD600]", "bg-[#FF3131]", "bg-[#00FF1E]"];
+            const colorClass = colors[index % colors.length];
+
+            return (
+              <div
+                key={robot.id}
+                className="flex flex-col items-center justify-start h-[340px] w-[180px] text-center relative"
+              >
+                {/* Name above robot */}
+                <div
+                  className={`${colorClass} w-[100%] px-4 py-0.5 font-extrabold text-4xl sm:text-5xl mb-1 text-left text-outline-black`}
+                  style={{
+                    fontFamily: "PP Neue Bit",
+                    lineHeight: "1",
+                  }}
+                >
+                  {robot.name}
+                </div>
+
+
+                {/* Robot image */}
+                <div className="relative flex items-center justify-center w-full h-[200px]">
+                  <Image
+                    src={robot.image}
+                    alt={robot.name}
+                    fill
+                    className="object-contain border-4 border-transparent hover:border-[#00FF1E] transition-all duration-200"
+                  />
+                  <div
+                    className="absolute top-2 left-2 bg-black/80 text-[#00FF1E] px-3 py-1 text-xl font-extrabold transform -rotate-12 tracking-widest border-2 border-[#00FF1E] pulse-glow"
+                    style={{ fontFamily: 'PP Neue Bit' }}
+                  >
+                    0
+                  </div>
+
+                </div>
+
+                {/* Vote button (less spacing) */}
+                <button className="mt-2 bg-transparent border-2 border-[#00FF1E] text-[#00FF1E] px-5 py-1.5 font-semibold hover:bg-[#00FF1E] hover:text-black transition-all duration-200">
+                  VOTE
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+
     </>
   );
 }
