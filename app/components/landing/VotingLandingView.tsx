@@ -60,6 +60,23 @@ export default function VotingLandingView() {
     ],
   ];
 
+  // ✅ Handle voting action
+  async function handleVote(robotName: string) {
+    // Update vote count in database
+    const currentCount = votes[robotName] ?? 0;
+
+    const { error } = await supabase
+      .from("votes")
+      .update({ vote_count: currentCount + 1 })
+      .eq("robot_name", robotName);
+
+    if (error) {
+      console.error("Vote update failed:", error);
+    } else {
+      // Optional local update (will also update via realtime)
+      setVotes((prev) => ({ ...prev, [robotName]: currentCount + 1 }));
+    }
+  }
 
 
   return (
@@ -196,7 +213,7 @@ export default function VotingLandingView() {
                 {/* Robot image */}
                 <div className="relative flex items-center justify-center w-full h-[200px]">
                   <Image
-                    src={`/robots/${robot.toLowerCase()}.png`}  
+                    src={`/robots/${robot.toLowerCase()}.png`}
                     alt={robot}
                     fill
                     className="object-contain border-4 border-transparent hover:border-[#00FF1E] transition-all duration-200"
@@ -205,15 +222,20 @@ export default function VotingLandingView() {
                     className="absolute top-2 left-2 bg-black/80 text-[#00FF1E] px-3 py-1 text-xl font-extrabold transform -rotate-12 tracking-widest border-2 border-[#00FF1E] pulse-glow"
                     style={{ fontFamily: 'PP Neue Bit' }}
                   >
-                    0
+                    {votes[robot] ?? 0}
                   </div>
+
 
                 </div>
 
                 {/* Vote button (less spacing) */}
-                <button className="mt-2 bg-transparent border-2 border-[#00FF1E] text-[#00FF1E] px-5 py-1.5 font-semibold hover:bg-[#00FF1E] hover:text-black transition-all duration-200">
+                <button
+                  onClick={() => handleVote(robot)}
+                  className="mt-2 bg-transparent border-2 border-[#00FF1E] text-[#00FF1E] px-5 py-1.5 font-semibold hover:bg-[#00FF1E] hover:text-black transition-all duration-200"
+                >
                   VOTE
                 </button>
+
               </div>
             );
           })}
