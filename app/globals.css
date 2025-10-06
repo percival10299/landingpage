@@ -112,3 +112,17 @@ body {
   -webkit-text-stroke: 1px black; /* this is the real one browsers use */
   -webkit-text-fill-color: #ffffff; /* keeps the inside white */
 }
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 8px #00ff1e, 0 0 16px #00ff1e;
+    transform: rotate(-12deg) scale(1);
+  }
+  50% {
+    box-shadow: 0 0 16px #00ff1e, 0 0 24px #00ff1e;
+    transform: rotate(-12deg) scale(1.1);
+  }
+}
+.pulse-glow {
+  animation: pulse-glow 1.2s infinite;
+}

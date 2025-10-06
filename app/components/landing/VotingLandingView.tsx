@@ -1,7 +1,46 @@
 "use client";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function VotingLandingView() {
+  const [votes, setVotes] = useState<Record<string, number>>({});
+
+  const votingRobots = [
+    "DEEPAK", "MALIN", "LYNDON", "JUNPEI", "COLLEEN",
+    "LIV", "DANI", "LOU", "DARYAN", "KENSHIN",
+  ];
+
+  // ✅ Fetch votes and subscribe
+  useEffect(() => {
+    async function loadVotes() {
+      const { data, error } = await supabase
+        .from("votes")
+        .select("robot_name, vote_count");
+      if (!error && data) {
+        const mapped = Object.fromEntries(data.map((v) => [v.robot_name, v.vote_count]));
+        setVotes(mapped);
+      }
+    }
+    loadVotes();
+
+    const channel = supabase
+      .channel("votes-changes")
+      .on(
+        "postgres_changes",
+        { event: "UPDATE", schema: "public", table: "votes" },
+        (payload) => {
+          const { robot_name, vote_count } = payload.new;
+          setVotes((prev) => ({ ...prev, [robot_name]: vote_count }));
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
   const robotRows = [
     [{ id: 1, type: "green", status: "active" }],
     [
@@ -21,19 +60,7 @@ export default function VotingLandingView() {
     ],
   ];
 
-  // ✅ FIXED image paths (no /public)
-  const votingRobots = [
-    { id: 1, name: "DEEPAK", image: "/robots/deepak.png" },
-    { id: 2, name: "MALIN", image: "/robots/malin.png" },
-    { id: 3, name: "LYNDON", image: "/robots/lyndon.png" },
-    { id: 4, name: "JUNPEI", image: "/robots/junpei.png" },
-    { id: 5, name: "COLLEEN", image: "/robots/colleen.png" },
-    { id: 6, name: "LIV", image: "/robots/liv.png" },
-    { id: 7, name: "DANI", image: "/robots/dani.png" },
-    { id: 8, name: "LOU", image: "/robots/lou.png" },
-    { id: 9, name: "DARYAN", image: "/robots/daryan.png" },
-    { id: 10, name: "KENSHIN", image: "/robots/kenshin.png" },
-  ];
+
 
   return (
     <>
@@ -151,7 +178,7 @@ export default function VotingLandingView() {
 
             return (
               <div
-                key={robot.id}
+                key={index}
                 className="flex flex-col items-center justify-start h-[340px] w-[180px] text-center relative"
               >
                 {/* Name above robot */}
@@ -162,15 +189,15 @@ export default function VotingLandingView() {
                     lineHeight: "1",
                   }}
                 >
-                  {robot.name}
+                  {robot}
                 </div>
 
 
                 {/* Robot image */}
                 <div className="relative flex items-center justify-center w-full h-[200px]">
                   <Image
-                    src={robot.image}
-                    alt={robot.name}
+                    src={`/robots/${robot.toLowerCase()}.png`}  
+                    alt={robot}
                     fill
                     className="object-contain border-4 border-transparent hover:border-[#00FF1E] transition-all duration-200"
                   />
