@@ -150,9 +150,6 @@ export default function VotingLandingView() {
 
         {/* Right Side - Desktop Only */}
         <div className="hidden md:flex flex-1 flex-col items-center justify-center text-white text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-wider">
-            DELIVERY IDOL
-          </h1>
 
           {/* Logo */}
           <div className="mb-8">

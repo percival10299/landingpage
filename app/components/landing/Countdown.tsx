@@ -16,7 +16,7 @@ export default function Countdown() {
   // 格式：YYYY-MM-DDTHH:MM:SS-时区偏移
   // 示例：2025-10-03T23:59:59-04:00 (今晚23:59:59，东部时间)
   const target = useMemo(
-    () => new Date("2025-10-07T20:00:00-04:00").getTime(),
+    () => new Date("2025-10-09T20:00:00-04:00").getTime(),
     []
   );
   const calc = (): TimeLeft => {
