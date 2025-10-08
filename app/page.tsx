@@ -36,6 +36,7 @@ export default function Home() {
           : "fixed inset-0 overflow-hidden h-screen" // ✅ fixed
         }`}
     >
+      
       {/* Background Component */}
       <div className="absolute inset-0 -z-10">
         <Background />
@@ -47,6 +48,7 @@ export default function Home() {
       />
 
       {isVotingOpen ? <VotingLandingView /> : <CountdownView />}
+      
     </main>
 
   );
