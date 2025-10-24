@@ -31,10 +31,7 @@ export default function Home() {
 
   return (
     <main
-      className={`w-full ${isVotingOpen
-          ? "relative overflow-visible min-h-screen" // ✅ scrollable
-          : "fixed inset-0 overflow-hidden h-screen" // ✅ fixed
-        }`}
+      className={`w-full "relative overflow-visible min-h-screen" `}
     >
       
       {/* Background Component */}
@@ -42,12 +39,9 @@ export default function Home() {
         <Background />
       </div>
 
-      <SocialMedia
-        isVotingOpen={isVotingOpen}
-        toggleState={toggleState}
-      />
+      <SocialMedia/>
 
-      {isVotingOpen ? <VotingLandingView /> : <CountdownView />}
+       <VotingLandingView/> 
       
     </main>
 

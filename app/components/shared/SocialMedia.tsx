@@ -1,12 +1,6 @@
 import Image from "next/image";
 
-export default function SocialMedia({
-  isVotingOpen,
-  toggleState,
-}: {
-  isVotingOpen: boolean;
-  toggleState: () => void;
-}) {
+export default function SocialMedia({ }) {
   return (
     <div>
       {/* Left side icons */}
@@ -79,14 +73,19 @@ export default function SocialMedia({
           ■ watch
         </button>
         <button
-          onClick={toggleState}
+          onClick={() => {
+            window.scrollBy({
+              top: window.innerHeight, // scrolls down exactly one screen height
+              behavior: "smooth",      // makes the scroll smooth
+            });
+          }}
           className="
       bg-transparent border-2 border-[#00FF1E] text-[#00FF1E]
       px-4 py-2 rounded-full font-bold
       hover:bg-[#00FF1E] hover:text-black transition-all
     "
         >
-          {isVotingOpen ? "▶ countdown" : "▶ vote"}
+          {"▶ vote"}
         </button>
       </div>
 

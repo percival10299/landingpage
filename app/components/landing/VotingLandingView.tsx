@@ -215,12 +215,6 @@ export default function VotingLandingView() {
                     fill
                     className="object-contain border-4 border-transparent hover:border-[#00FF1E] transition-all duration-200"
                   />
-                  <div
-                    className="absolute top-2 left-2 bg-black/80 text-[#00FF1E] px-3 py-1 text-xl font-extrabold transform -rotate-12 tracking-widest border-2 border-[#00FF1E] pulse-glow"
-                    style={{ fontFamily: 'PP Neue Bit' }}
-                  >
-                    {votes[robot] ?? 0}
-                  </div>
 
 
                 </div>
