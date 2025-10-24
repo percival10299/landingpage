@@ -231,7 +231,7 @@ export default function VotingLandingView() {
                   {/* subtle glow pulse background effect */}
                   <span className="absolute inset-0 opacity-0 hover:opacity-20 bg-[#00FF1E] transition-opacity duration-300"></span>
                 </button>
-å
+
               </div>
 
             );
