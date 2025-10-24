@@ -90,7 +90,7 @@ export default function VotingLandingView() {
               <div key={rowIndex} className="flex justify-center gap-6 md:gap-8">
                 {row.map((robot) => (
                   <div key={robot.id} className="flex flex-col items-center">
-                    <div className="relative w-20 h-20 md:w-32 md:h-32 lg:w-36 lg:h-36">
+                    <div className="relative w-17 h-17 md:w-32 md:h-32 lg:w-36 lg:h-36">
                       {/* Robot image (same size for all types) */}
                       <Image
                         src={`/robots/${robot.type}bot.png`}
