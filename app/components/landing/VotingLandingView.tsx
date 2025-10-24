@@ -2,10 +2,10 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import VoteButton from "../shared/VoteButton";
 
 export default function VotingLandingView() {
   const [votes, setVotes] = useState<Record<string, number>>({});
-
   const votingRobots = [
     "DEEPAK", "MALIN", "LYNDON", "JUNPEI", "COLLEEN",
     "LIV", "DANI", "LOU", "DARYAN", "KENSHIN",
@@ -215,23 +215,7 @@ export default function VotingLandingView() {
                 </div>
 
                 {/* Vote button */}
-                <button
-                  onClick={() => handleVote(robot)}
-                  className="
-    mt-2 relative overflow-hidden
-    bg-transparent border-2 border-[#00FF1E] text-[#00FF1E]
-    px-4 py-1 text-sm sm:px-5 sm:py-1.5 sm:text-base font-semibold
-    transition-all duration-200 ease-in-out
-    hover:bg-[#00FF1E] hover:text-black hover:shadow-[0_0_15px_#00FF1E]
-    active:scale-95 active:shadow-[0_0_20px_#00FF1E]
-  "
-                >
-                  <span className="relative z-10">VOTE</span>
-
-                  {/* subtle glow pulse background effect */}
-                  <span className="absolute inset-0 opacity-0 hover:opacity-20 bg-[#00FF1E] transition-opacity duration-300"></span>
-                </button>
-
+                <VoteButton robot={robot} handleVote={handleVote} />
               </div>
 
             );
