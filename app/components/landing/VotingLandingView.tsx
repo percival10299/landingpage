@@ -183,11 +183,19 @@ export default function VotingLandingView() {
             return (
               <div
                 key={index}
-                className="flex flex-col items-center justify-start h-[340px] w-[180px] text-center relative"
+                className="
+    flex flex-col items-center justify-start 
+    h-[300px] w-[140px] sm:h-[340px] sm:w-[180px] 
+    text-center relative
+  "
               >
-                {/* Name above robot */}
                 <div
-                  className={`${colorClass} w-[100%] px-4 py-0.5 font-extrabold text-4xl sm:text-5xl mb-1 text-left text-outline-black`}
+                  className={`${colorClass} 
+    w-full px-2 sm:px-4 py-0.5 
+    font-black sm:font-extrabold   /* thicker on mobile, normal on desktop */
+    text-2xl sm:text-4xl 
+    mb-1 text-left text-outline-black
+  `}
                   style={{
                     fontFamily: "PP Neue Bit",
                     lineHeight: "1",
@@ -196,28 +204,29 @@ export default function VotingLandingView() {
                   {robot}
                 </div>
 
-
                 {/* Robot image */}
-                <div className="relative flex items-center justify-center w-full h-[200px]">
+                <div className="relative flex items-center justify-center w-full h-[160px] sm:h-[200px]">
                   <Image
                     src={`/robots/${robot.toLowerCase()}.png`}
                     alt={robot}
                     fill
                     className="object-contain border-4 border-transparent hover:border-[#00FF1E] transition-all duration-200"
                   />
-
-
                 </div>
 
-                {/* Vote button (less spacing) */}
+                {/* Vote button */}
                 <button
                   onClick={() => handleVote(robot)}
-                  className="mt-2 bg-transparent border-2 border-[#00FF1E] text-[#00FF1E] px-5 py-1.5 font-semibold hover:bg-[#00FF1E] hover:text-black transition-all duration-200"
+                  className="
+      mt-2 bg-transparent border-2 border-[#00FF1E] text-[#00FF1E]
+      px-4 py-1 text-sm sm:px-5 sm:py-1.5 sm:text-base
+      font-semibold hover:bg-[#00FF1E] hover:text-black transition-all duration-200
+    "
                 >
                   VOTE
                 </button>
-
               </div>
+
             );
           })}
         </div>
