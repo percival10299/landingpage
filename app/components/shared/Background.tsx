@@ -42,14 +42,11 @@ export default function Background() {
         const rect = symbol.getBoundingClientRect();
         const x = rect.left + rect.width / 2;
         const y = rect.top + rect.height / 2;
-
         const dx = clientX - x;
         const dy = clientY - y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-
         const maxRotation = 720;
         const angle = Math.max(0, maxRotation - dist / 1.2);
-
         symbol.style.transform = `rotate(${angle}deg)`;
       });
     };
@@ -60,11 +57,12 @@ export default function Background() {
       });
     };
 
-    // Desktop
-    const handleMouseMove = (e: MouseEvent) => rotateSymbols(e.clientX, e.clientY);
+    // 🖱️ Desktop
+    const handleMouseMove = (e: MouseEvent) =>
+      rotateSymbols(e.clientX, e.clientY);
     const handleMouseLeave = resetSymbols;
 
-    // Mobile
+    // 📱 Mobile
     const handleTouchMove = (e: TouchEvent) => {
       const touch = e.touches[0];
       if (touch) {
@@ -78,14 +76,41 @@ export default function Background() {
     document.addEventListener("touchmove", handleTouchMove);
     document.addEventListener("touchend", handleTouchEnd);
 
+    // ✅ ADD THIS SECTION (part 4)
+    const onScroll = () => {
+      // how far down you are through the first screen (0 → 1)
+      const progress = Math.min(window.scrollY / window.innerHeight, 1);
+
+      // blue → brighter green
+      const r = Math.round(0x22 + (0x1e - 0x22) * progress);
+      const g = Math.round(0x34 + (0x5f - 0x34) * progress);
+      const b = Math.round(0xff + (0x3b - 0xff) * progress);
+
+
+      // yellow → light green
+      const ar = Math.round(0xed + (0x92 - 0xed) * progress);
+      const ag = Math.round(0xdf + (0xff - 0xdf) * progress);
+      const ab = Math.round(0x56 + (0x92 - 0x56) * progress);
+
+      // apply colors live to your CSS variables
+      const root = document.documentElement;
+      root.style.setProperty("--chaos-bg", `rgb(${r} ${g} ${b})`);
+      root.style.setProperty("--chaos-accent", `rgb(${ar} ${ag} ${ab})`);
+    };
+
+
+    onScroll(); // run once on mount
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // 🧹 Cleanup
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("touchmove", handleTouchMove);
       document.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("scroll", onScroll); // ✅ cleanup scroll listener
     };
   }, []);
-
 
   return (
     <div className="chaos-container">

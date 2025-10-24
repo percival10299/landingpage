@@ -169,7 +169,7 @@ export default function VotingLandingView() {
       {/* =========================== */}
       {/* Voting Section (Desktop) */}
       {/* =========================== */}
-      <div className="bg-[#1b8d81] min-h-screen flex flex-col justify-center items-center py-16 text-white">
+      <div className="min-h-screen flex flex-col justify-center items-center py-16 text-white">
         <h1 className="text-4xl sm:text-5xl font-bold mb-12 tracking-wide text-center">
           VOTE YOUR BOT
         </h1>

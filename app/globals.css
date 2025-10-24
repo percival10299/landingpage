@@ -10,6 +10,11 @@
   --chaos-accent: #eddf56; /* 黄色符号 */
 }
 
+.theme-green {
+  --chaos-bg: #338558;      /* dark green background */
+  --chaos-accent: #8dfa8d;  /* light green symbols */
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -41,10 +46,14 @@ body {
 
 /* ====== Chaos Background 样式 ====== */
 .chaos-container {
-  width: 100vw;
-  height: 100vh;
-  background-color: var(--chaos-bg);
-  overflow: hidden;
+ position: fixed;
+ inset: 0;
+ z-index: -1;
+ width: 100vw;
+ height: 100vh;
+ background-color: var(--chaos-bg);
+ overflow: hidden;
+ pointer-events: none;
 }
 
 .chaos-grid {
@@ -80,6 +89,7 @@ body {
   position: absolute;
   background-color: var(--chaos-accent);
   border-radius: 2px;
+  transition: background-color 0.6s ease; 
 }
 
 /* 横线 */
