@@ -13,9 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Delivery Idol — Vote for Your Favorite Robot!",
-  description: "Vote, watch, and celebrate your favorite robots on Delivery Idol.",
-  keywords: ["Delivery Idol", "robot voting", "Next.js", "interactive competition"],
+  metadataBase: new URL("https://deliveryidol.net"),
   openGraph: {
     title: "Delivery Idol",
     description: "Vote for your favorite robot live!",
@@ -23,9 +21,9 @@ export const metadata = {
     siteName: "Delivery Idol",
     images: [
       {
-        url: "https://deliveryidol.net/share_logo.png",
-        width: 1200,
-        height: 630,
+        url: "https://deliveryidol.net/og-image.jpg", // solid background, not transparent
+        width: 1024,
+        height: 1024,
       },
     ],
     locale: "en_US",
