@@ -21,7 +21,7 @@ export const metadata = {
     siteName: "Delivery Idol",
     images: [
       {
-        url: "https://deliveryidol.net/og-image.jpg", // solid background, not transparent
+        url: "https://deliveryidol.net/og-image.png", // solid background, not transparent
         width: 1024,
         height: 1024,
       },
