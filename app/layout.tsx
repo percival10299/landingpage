@@ -23,9 +23,9 @@ export const metadata = {
     siteName: "Delivery Idol",
     images: [
       {
-        url: "https://deliveryidol.net/logo.png",
-        width: 1200,
-        height: 630,
+        url: "https://deliveryidol.net/share_logo.png",
+        width: 800,
+        height: 800,
       },
     ],
     locale: "en_US",
