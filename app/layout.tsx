@@ -24,8 +24,8 @@ export const metadata = {
     images: [
       {
         url: "https://deliveryidol.net/share_logo.png",
-        width: 800,
-        height: 800,
+        width: 792,
+        height: 792,
       },
     ],
     locale: "en_US",
