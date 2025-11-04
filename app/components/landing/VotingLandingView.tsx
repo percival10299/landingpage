@@ -53,8 +53,8 @@ export default function VotingLandingView() {
       { id: 6, type: "white", status: "active" },
     ],
     [
-      { id: 7, type: "white", status: "active" },
-      { id: 8, type: "white", status: "active" },
+      { id: 7, type: "black", status: "eliminated" },
+      { id: 8, type: "black", status: "eliminated" },
       { id: 9, type: "black", status: "eliminated" },
       { id: 10, type: "black", status: "eliminated" },
     ],
@@ -129,8 +129,8 @@ export default function VotingLandingView() {
 
           {/* 👇 Mobile-only Text */}
           <div className="block md:hidden flex flex-col justify-center items-center text-center text-white mt-8">
-            <p className="text-lg mb-2">Elimination hits Friday:</p>
-            <h2 className="text-3xl font-bold mb-2">10 BOTS. 8 SPOTS.</h2>
+            <p className="text-xl mb-2 font-bold">Next Elimination:</p>
+            <h2 className="text-3xl font-bold mb-2">8 BOTS. 6 SPOTS.</h2>
             <p className="text-sm opacity-80 mb-2">
               cast your vote and keep your favorite rolling!
             </p>
@@ -154,9 +154,9 @@ export default function VotingLandingView() {
 
           {/* Text */}
           <div className="text-center">
-            <p className="text-lg md:text-xl mb-4">Elimination hits Friday:</p>
+            <p className="text-lg font-bold md:text-3xl mb-4">Next Elimination:</p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-              10 BOTS. 8 SPOTS.
+              8 BOTS. 6 SPOTS.
             </h2>
             <p className="text-sm md:text-base opacity-80 mb-4">
               cast your vote and keep your favorite rolling!
@@ -184,18 +184,18 @@ export default function VotingLandingView() {
               <div
                 key={index}
                 className="
-    flex flex-col items-center justify-start 
-    h-[300px] w-[140px] sm:h-[340px] sm:w-[180px] 
-    text-center relative
-  "
+      flex flex-col items-center justify-start 
+      h-[300px] w-[140px] sm:h-[340px] sm:w-[180px] 
+      text-center relative
+    "
               >
                 <div
                   className={`${colorClass} 
-    w-full px-2 sm:px-4 py-0.5 
-    font-black sm:font-extrabold   /* thicker on mobile, normal on desktop */
-    text-2xl sm:text-4xl 
-    mb-1 text-left text-outline-black
-  `}
+        w-full px-2 sm:px-4 py-0.5 
+        font-black sm:font-extrabold
+        text-2xl sm:text-4xl 
+        mb-1 text-left text-outline-black
+      `}
                   style={{
                     fontFamily: "PP Neue Bit",
                     lineHeight: "1",
@@ -205,7 +205,10 @@ export default function VotingLandingView() {
                 </div>
 
                 {/* Robot image */}
-                <div className="relative flex items-center justify-center w-full h-[160px] sm:h-[200px]">
+                <div
+                  className={`relative flex items-center justify-center w-full h-[160px] sm:h-[200px] ${index === 4 || index === 8 ? "opacity-30" : "opacity-100"
+                    }`}
+                >
                   <Image
                     src={`/robots/${robot.toLowerCase()}.png`}
                     alt={robot}
@@ -214,11 +217,13 @@ export default function VotingLandingView() {
                   />
                 </div>
 
-                {/* Vote button */}
-                <VoteButton robot={robot} handleVote={handleVote} />
+                {/* Vote button – only show if index is NOT 4 or 8 */}
+                {index !== 4 && index !== 8 && (
+                  <VoteButton robot={robot} handleVote={handleVote} />
+                )}
               </div>
-
             );
+
           })}
         </div>
       </div>
