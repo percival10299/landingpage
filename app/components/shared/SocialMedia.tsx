@@ -63,7 +63,7 @@ export default function SocialMedia({ }) {
       >
         <button
           onClick={() =>
-            window.open("https://www.youtube.com/watch?v=ouWNFVr5C-I", "_blank")
+            window.open("https://www.youtube.com/watch?v=GzIXUFinjms", "_blank")
           }
           className="
       bg-[#00FF1E] text-black px-4 py-2 rounded-full font-bold
